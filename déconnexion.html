@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Campus - Déconnexion</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            padding: 20px 0;
+        }
+        .logo {
+            font-size: 2.5em;
+            color: #333;
+        }
+        .moon {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        .logout-section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .logout-box {
+            text-align: center;
+        }
+        .logout-message {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+        .user-info {
+            margin-top: 20px;
+        }
+        .user-info p {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 id="cyber-campus" class="logo">Cyber Campus</h1>
+            <div class="moon">🌙</div>
+        </header>
+
+        <div class="logout-section">
+            <div class="logout-box">
+                <div class="logout-message">À plus tard !</div>
+                <div>Utilisateur</div>
+            </div>
+            <div class="user-info">
+                <p>Adresse IP: $(ip)</p>
+                <p>MAC: $(mac)</p>
+                <p>Up | Down: $(bytes-in-nice) | $(bytes-out-nice)</p>
+                <p>Temps écoulé: $(uptime)</p>
+                $(if remain-bytes-total)
+                <p>Data: $(remain-bytes-total-nice)</p>
+                $(endif)
+                $(if session-time-left)
+                <p>Temps: $(session-time-left)</p>
+                $(endif)
+                <p>Connexion: $(username)</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
