@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion Cyber Campus</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .img1 {
+            animation: slide1 10s linear infinite;
+        }
+
+        .img2 {
+            animation: slide2 10s linear infinite;
+        }
+
+        .logo {
+            font-size: 2.5em;
+            color: white;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo::before {
+            content: '';
+            font-size: 0.8em;
+            margin-right: 10px;
+            animation: rotate 5s linear infinite;
+            display: inline-block;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .moon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2em;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .nav-button {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+        }
+
+        .nav-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        @keyframes buttonPulse {
+            0% { background-color: #fdbb2d; color: #1a2a6c; }
+            50% { background-color: #1a2a6c; color: #fdbb2d; }
+            100% { background-color: #fdbb2d; color: #1a2a6c; }
+        }
+
+        .nav-button.animate-pay {
+            animation: buttonPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes textChange {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .nav-button.animate-pay {
+            animation: textChange 0.5s ease-in-out, buttonPulse 3s ease-in-out infinite;
+        }
+
+        main {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 40px;
+            position: relative;
+        }
+
+        .login-section, .rates-section, .locations-section, .products-section {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .login-section:hover, .rates-section:hover, .locations-section:hover, .products-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .login-section {
+            flex-basis: 100%;
+        }
+
+        .rates-section, .locations-section, .products-section {
+            flex-basis: calc(33.333% - 20px);
+        }
+
+        h2 {
+            color: white;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #fdbb2d;
+            transition: width 0.3s;
+        }
+
+        .login-section:hover h2::after,
+        .rates-section:hover h2::after,
+        .locations-section:hover h2::after,
+        .products-section:hover h2::after {
+            width: 100%;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: none;
+            border-radius: 25px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+        input:focus {
+            background-color: rgba(255, 255, 255, 0.3);
+            outline: none;
+        }
+
+        button {
+            background-color: #fdbb2d;
+            color: #1a2a6c;
+            border: none;
+            padding: 10px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #1a2a6c;
+            color: #fdbb2d;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            color: white;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        li {
+            margin-bottom: 5px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        li::before {
+            content: '➤';
+            position: absolute;
+            left: 0;
+            color: #fdbb2d;
+        }
+
+        .animated-text-container {
+            overflow: hidden;
+            height: 50px;
+        }
+
+        .animated-text {
+            animation: scrollText 10s linear infinite;
+        }
+
+        @keyframes scrollText {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-50px); }
+        }
+
+        footer {
+            margin-top: auto;
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes slide1 {
+            0% { transform: translateX(0); }
+            50% { transform: translateX(-100%); }
+            100% { transform: translateX(0); }
+        }
+
+        @keyframes slide2 {
+            0% { transform: translateX(100%); }
+            50% { transform: translateX(0); }
+            100% { transform: translateX(100%); }
+        }
+
+        @media (max-width: 768px) {
+            .rates-section, .locations-section, .products-section {
+                flex-basis: 100%;
+            }
+        }
+
+        .notification {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            display: none;
+            color: #1a2a6c;
+        }
+
+        .notification h2 {
+            color: #1a2a6c;
+            margin-bottom: 10px;
+        }
+
+        .notification p {
+            margin-bottom: 20px;
+        }
+
+        .close-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        #ticket-select {
+            margin-bottom: 20px;
+        }
+
+        #nomTicket {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        #paymentFrame {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+        }
+
+        #paymentFrame > div {
+            position: relative;
+            width: 80%;
+            height: 80%;
+            margin: 5% auto;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        #closePaymentFrame {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 1001;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #1a2a6c;
+        }
+
+        #paymentIframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .delete-button {
+            background-color: #f44336; /* Rouge pour un bouton de suppression */
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            margin-left: 10px; /* Espace entre les boutons */
+        }
+
+        .delete-button:hover {
+            background-color: #d32f2f; /* Rouge foncé au survol */
+        }
+    </style>
+        <script src="/md5.js"></script>
+        $(if chap-id)
+        <form name="sendin" action="$(link-login-only)" method="post" style="display:none">
+            <input type="hidden" name="username" />
+            <input type="hidden" name="password" />
+            <input type="hidden" name="dst" value="$(link-orig)" />
+            <input type="hidden" name="popup" value="true" />
+        </form>
+        <script>
+            function doLogin() {
+                document.sendin.username.value = document.login.username.value;
+                document.sendin.password.value = hexMD5('$(chap-id)' + document.login.password.value + '$(chap-challenge)');
+                document.sendin.submit();
+                return false;
+            }
+        </script>
+        $(endif)
+        <script type="module">
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+            import { getDatabase, ref, get, update, remove, set, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+    
+            const firebaseConfig = {
+                apiKey: "AIzaSyB6AUBnK_7Vy2ABWI2JMo3ebG_Sljr8XlY",
+                authDomain: "cyber-campus-2706f.firebaseapp.com",
+                databaseURL: "https://cyber-campus-2706f-default-rtdb.firebaseio.com",
+                projectId: "cyber-campus-2706f",
+                storageBucket: "cyber-campus-2706f.appspot.com",
+                messagingSenderId: "719410601264",
+                appId: "1:719410601264:web:44fd2e3757721866303cf5",
+                measurementId: "G-CEEFJP5LYZ"
+            };
+    
+            const app = initializeApp(firebaseConfig);
+            const db = getDatabase(app);
+    
+            function generateUniqueId() {
+                let userId = localStorage.getItem('cyberCampusUserId');
+                if (!userId) {
+                    userId = 'user-' + Date.now() + '-' + Math.random().toString(36).substring(2, 15);
+                    localStorage.setItem('cyberCampusUserId', userId);
+                }
+                return userId;
+            }
+    
+            const userId = generateUniqueId();
+    
+            function storeTicketLocally(ticketData) {
+                localStorage.setItem('storedTicket', JSON.stringify(ticketData));
+            }
+    
+            function updateButtonText() {
+                const payButton = document.querySelector('.nav-button.animate-pay');
+                const storedTicket = localStorage.getItem('storedTicket');
+                payButton.textContent = storedTicket ? 'Voir mon ticket' : 'Payer un ticket';
+            }
+    
+            function openPaymentFrame(paymentLink) {
+                const frame = document.getElementById('paymentFrame');
+                const iframe = document.getElementById('paymentIframe');
+                iframe.src = paymentLink;
+                frame.style.display = 'block';
+    
+                window.addEventListener('message', handlePaymentMessage);
+                frame.dataset.urlCheckInterval = setInterval(monitorIframeUrl, 500);
+            }
+    
+            function closePaymentFrame() {
+                const frame = document.getElementById('paymentFrame');
+                const iframe = document.getElementById('paymentIframe');
+                iframe.src = '';
+                frame.style.display = 'none';
+    
+                window.removeEventListener('message', handlePaymentMessage);
+                clearInterval(parseInt(frame.dataset.urlCheckInterval));
+            }
+    
+            function handlePaymentMessage(event) {
+                if (event.origin !== "https://live.fedapay.com/") return;
+    
+                if (event.data.status === "success" || event.data.url === "http://cyberducampus.net/") {
+                    closePaymentFrame();
+                    handleSuccessfulPayment(event.data.ticketName);
+                }
+            }
+    
+            function monitorIframeUrl() {
+                const iframe = document.getElementById('paymentIframe');
+                try {
+                    const iframeUrl = iframe.contentWindow.location.href;
+                    if (iframeUrl.toLowerCase().includes('cyberducampus')) {
+                        closePaymentFrame();
+                        const lastTicketName = localStorage.getItem('lastTicketName'); 
+                        if (lastTicketName) {
+                            handleSuccessfulPayment(lastTicketName);
+                        } else {
+                            console.warn("Aucune information de ticket trouvée. Le paiement semble réussi mais les détails sont manquants.");
+                            showNotification("Paiement réussi", "Votre paiement semble avoir été traité avec succès. Si vous ne voyez pas votre ticket, veuillez contacter le support.");
+                        }
+                    }
+                } catch (e) {
+                    console.error("Erreur de sécurité lors de la surveillance de l'URL de l'iframe : ", e);
+                }
+            }
+    
+            async function buyTicket() {
+        
+                const ticketName = document.getElementById('nomTicket').value;
+                if (!ticketName) {
+                    showNotification("Erreur", "Veuillez sélectionner un ticket.");
+                    return;
+                }
+    
+                try {
+                    const ticketRef = ref(db, 'Tickets/' + ticketName);
+                    const snapshot = await get(ticketRef);
+    
+                    if (snapshot.exists()) {
+                        const ticketData = snapshot.val();
+                        if (ticketData.utilisateur && ticketData.utilisateur.length > 0) {
+                            const paymentLink = ticketData.lienPaiement;
+                            localStorage.setItem('lastTicketName', ticketName);
+                            await handleKeyChange(ticketName);
+                            openPaymentFrame(paymentLink);
+                        } else {
+                            showNotification("Erreur", "Aucun ticket disponible pour ce type.");
+                        }
+                    } else {
+                        showNotification("Erreur", "Type de ticket non trouvé.");
+                    }
+                } catch (error) {
+                    console.error("Erreur lors de l'ouverture de la page de paiement: ", error);
+                    showNotification("Erreur", "Une erreur s'est produite lors de l'ouverture de la page de paiement.");
+                }
+            }
+    
+            window.buyTicket = buyTicket;
+            window.closePaymentFrame = closePaymentFrame;
+    
+            async function handleKeyChange(ticketName) {
+                const oldKey = localStorage.getItem('cyberCampusUserId');
+                if (oldKey) {
+                    try {
+                        const userRef = ref(db, 'Users/' + oldKey);
+                        await remove(userRef);
+                        localStorage.removeItem('cyberCampusUserId');
+                        const newKey = generateUniqueId();
+                        localStorage.setItem('cyberCampusUserId', newKey);
+                        console.log('Changement de clé réussi. Nouvelle clé :', newKey);
+                    } catch (error) {
+                        console.error('Erreur lors du changement de clé :', error);
+                        showNotification('Erreur', 'Une erreur s\'est produite lors du changement de clé.');
+                    }
+                } else {
+                    console.warn('Aucune clé existante dans le stockage local.');
+                }
+            }
+    
+            async function handleSuccessfulPayment(ticketName) {
+                try {
+                    const ticketRef = ref(db, 'Tickets/' + ticketName);
+                    const snapshot = await get(ticketRef);
+                    if (snapshot.exists()) {
+                        const ticketData = snapshot.val();
+    
+                        const index = Object.keys(ticketData.utilisateur).find(key => ticketData.utilisateur[key] !== null);
+    
+                        if (index !== undefined) {
+                            const ticketInfo = {
+                                ticketName: ticketName,
+                                user: ticketData.utilisateur[index],
+                                password: ticketData.motDePasse[index],
+                                price: ticketData.prix[index]
+                            };
+    
+                            const userTicketRef = ref(db, 'Users/' + userId + '/tickets/' + Date.now());
+                            await set(userTicketRef, ticketInfo);
+    
+                            storeTicketLocally(ticketInfo);
+    
+                            showNotification("Ticket acheté",
+                                `Nom d'utilisateur: ${ticketInfo.user}\n` +
+                                `Mot de passe: ${ticketInfo.password}\n` +
+                                `Prix: ${ticketInfo.price} F`,
+                                true
+                            );
+    
+                            let updatedUtilisateur = {};
+                            let updatedMotDePasse = {};
+                            let updatedPrix = {};
+                            let newIndex = 0;
+    
+                            Object.keys(ticketData.utilisateur).forEach(key => {
+                                if (key !== index && ticketData.utilisateur[key] !== null) {
+                                    updatedUtilisateur[newIndex] = ticketData.utilisateur[key];
+                                    updatedMotDePasse[newIndex] = ticketData.motDePasse[key];
+                                    updatedPrix[newIndex] = ticketData.prix[key];
+                                    newIndex++;
+                                }
+                            });
+    
+                            if (Object.keys(updatedUtilisateur).length > 0) {
+                                await update(ticketRef, {
+                                    utilisateur: updatedUtilisateur,
+                                    motDePasse: updatedMotDePasse,
+                                    prix: updatedPrix
+                                });
+                            } else {
+                                await remove(ticketRef);
+                            }
+    
+                            updateButtonText();
+                        } else {
+                            showNotification("Erreur", "Tous les tickets de cette catégorie ont été vendus.");
+                        }
+                    } else {
+                        showNotification("Erreur", "Ticket non trouvé");
+                    }
+                } catch (error) {
+                    console.error("Erreur lors de la récupération du ticket : ", error);
+                    showNotification("Erreur", "Une erreur s'est produite lors de la récupération du ticket.");
+                    logTransactionError();
+                }
+            }
+    
+            function showNotification(title, message, isTicketPurchase = false) {
+    const notification = document.getElementById('notification');
+    const notificationTitle = document.getElementById('notification-title');
+    const notificationMessage = document.getElementById('notification-message');
+    const payButton = notification.querySelector('button');
+
+    // Supprimer les boutons s'ils existent déjà
+    const existingLoginButton = notification.querySelector('.login-button');
+    const existingDeleteButton = notification.querySelector('.delete-button');
+    if (existingLoginButton) {
+        existingLoginButton.remove();
+    }
+    if (existingDeleteButton) {
+        existingDeleteButton.remove();
+    }
+
+    notificationTitle.textContent = title;
+    notificationMessage.textContent = message;
+
+    populateTicketOptions(); // Mettre à jour les options du sélecteur de ticket
+
+    const storedTicket = JSON.parse(localStorage.getItem('storedTicket'));
+
+    if (storedTicket) {
+        notificationTitle.textContent = 'Votre ticket';
+        notificationMessage.textContent = `
+            Nom d'utilisateur: ${storedTicket.user}
+            Mot de passe: ${storedTicket.password}
+            Prix: ${storedTicket.price} F
+        `;
+        payButton.style.display = 'none';
+        document.getElementById('ticket-select').style.display = 'none';
+
+        // Créer le bouton "Connexion"
+        const loginButton = document.createElement('button');
+        loginButton.className = 'login-button';
+        loginButton.textContent = 'Connexion';
+        loginButton.addEventListener('click', () => {
+            autoLogin(storedTicket.user, storedTicket.password);
+        });
+        notification.appendChild(loginButton);
+
+        // Créer le bouton "Supprimer"
+        const deleteButton = document.createElement('button');
+        deleteButton.className = 'delete-button';
+        deleteButton.textContent = 'Supprimer';
+        deleteButton.addEventListener('click', () => {
+            deleteTicket();
+        });
+        notification.appendChild(deleteButton);
+    } else if (isTicketPurchase) {
+        payButton.style.display = 'none';
+        document.getElementById('ticket-select').style.display = 'none';
+
+        // Créer le bouton "Connexion"
+        const loginButton = document.createElement('button');
+        loginButton.className = 'login-button';
+        loginButton.textContent = 'Connexion';
+        loginButton.addEventListener('click', () => {
+            const lines = message.split('\n');
+            const username = lines[0].split(': ')[1];
+            const password = lines[1].split(': ')[1];
+            autoLogin(username, password);
+        });
+        notification.appendChild(loginButton);
+    } else {
+        payButton.style.display = 'block';
+        document.getElementById('ticket-select').style.display = 'block';
+    }
+
+    notification.style.display = 'block';
+}
+    
+            function autoLogin(username, password) {
+                document.login.username.value = username;
+                document.login.password.value = password;
+                document.login.submit();
+            }
+    
+            function logTransactionError() {
+                const timestamp = new Date().toISOString();
+                const errorRef = ref(db, 'TransactionErrors');
+                push(errorRef, { timestamp });
+                console.log(`Erreur de transaction enregistrée à ${timestamp}`);
+            }
+    
+            function populateTicketOptions() {
+                const select = document.getElementById('nomTicket');
+                select.innerHTML = '<option value="">Sélectionnez un ticket</option>';
+                const tickets = [
+                    "1 Heure - 100 F",
+                    "2 Heures - 200 F",
+                    "3 Heures - 250 F",
+                    "1 Heure Pro - 250 F",
+                    "2 Heures Pro - 450 F",
+                    "3 Heures Pro - 600 F",
+                    "1 Go - 100 F",
+                    "5 Go - 400 F",
+                    "10 Go - 700 F",
+                    "25 Go - 1500 F",
+                    "1 Jour (illimité) - 300 F",
+                    "3 Jours (illimité) - 600 F",
+                    "7 Jours (illimité) - 1200 F",
+                    "30 Jours (illimité) - 4000 F",
+                    "1 Jour Pro (illimité) - 600 F",
+                    "3 Jours Pro (illimité) - 1200 F",
+                    "7 Jours Pro (illimité) - 2400 F",
+                    "30 Jours Pro (illimité) - 8000 F"
+                ];
+                tickets.forEach(ticket => {
+                    const option = document.createElement('option');
+                    option.value = ticket.split(' - ')[0];
+                    option.textContent = ticket;
+                    select.appendChild(option);
+                });
+            }
+    
+            document.querySelector('.rates-section').addEventListener('click', function() {
+                showNotification('Payer un ticket', 'Sélectionnez votre ticket et procédez au paiement.');
+            });
+    
+            document.querySelector('.nav-button.animate-pay').addEventListener('click', function() {
+                const storedTicket = localStorage.getItem('storedTicket');
+                showNotification(storedTicket ? 'Votre ticket' : 'Payer un ticket', storedTicket ? '' : 'Sélectionnez votre ticket et procédez au paiement.', storedTicket ? true : false);
+            });
+    
+            document.addEventListener('DOMContentLoaded', updateButtonText);
+    
+            function deleteTicket() {
+                localStorage.removeItem('storedTicket');
+                showNotification("Ticket supprimé", "Votre ticket a été supprimé avec succès.");
+                const deleteButton = document.querySelector('.delete-button');
+                if (deleteButton) {
+                    deleteButton.remove();
+                }
+                const loginButton = document.querySelector('.login-button');
+                if (loginButton) {
+                    loginButton.style.display = 'block';
+                }
+                updateButtonText();
+            }
+        </script>
+    </head>
+    <body>
+        <header>
+            <div class="container">
+                <h1 class="logo">Cyber Campus</h1>
+                <div class="moon"></div>
+                <img class="header-image img1" src="img/img1.jpg" alt="Image de fond">
+                <img class="header-image img2" src="img/img2.jpg" alt="Image de fond">
+                <nav>
+                    <button class="nav-button">+229 60374877</button>
+                    <button class="nav-button animate-pay">Payer un ticket</button>
+                </nav>
+            </div>
+        </header>
+    
+        <main class="container">
+            <section class="login-section">
+                <h2>Connexion</h2>
+                <form name="login" action="$(link-login-only)" method="post" $(if chap-id) onSubmit="return doLogin()" $(endif)>
+                    <input type="hidden" name="dst" value="$(link-orig)" />
+                    <input type="hidden" name="popup" value="true" />
+                    <input type="text" name="username" placeholder="Nom d'utilisateur" value="$(username)" required>
+                    <input type="password" name="password" placeholder="Mot de passe" required>
+                    <button type="submit">Se connecter</button>
+                </form>
+                <p class="info $(if error)alert$(endif)">
+                    $(if error == "")Veuillez vous connecter pour utiliser le service hotspot Internet $(if trial == 'yes')<br />Essai gratuit disponible, <a href="$(link-login-only)?dst=$(link-orig-esc)&username=T-$(mac-esc)">cliquez ici</a>.$(endif)
+                    $(endif)
+                    $(if error)$(error)$(endif)
+                </p>
+            </section>
+    
+            <section class="rates-section">
+                <h2>Tarifs</h2>
+                <table>
+                    <tr>
+                        <th>Forfait</th>
+                        <th>Prix</th>
+                    </tr>
+                    <tr>
+                        <td>1 Heure</td>
+                        <td>100 F</td>
+                    </tr>
+                    <tr>
+                        <td>1 Go</td>
+                        <td>100 F</td>
+                    </tr>
+                    <tr>
+                        <td>1 Jour (illimité)</td>
+                        <td>300 F</td>
+                    </tr>
+                </table>
+            </section>
+    
+            <section class="locations-section">
+                <h2>Nos sites de connexion</h2>
+                <ul>
+                    <li>Cyber Campus Arafat</li>
+                    <li>Cyber Campus Université</li>
+                    <li>Cyber Campus Rose croix</li>
+                    <li>Cyber Campus Banikanni 1</li>
+                    <li>Cyber Campus Banikanni 2</li>
+                </ul>
+            </section>
+    
+            <section class="products-section">
+                <h2>Nos produits</h2>
+                <ul>
+                    <li>Maintenance réseau</li>
+                    <li>Installation Wi-Fi Zone</li>
+                    <li>Maintenance informatique</li>
+                    <li>Creation de Site web et Application mobile</li>
+                </ul>
+            </section>
+        </main>
+    
+        <footer>
+            <div class="animated-text-container">
+                <div class="animated-text">
+                    Payer vos tickets en ligne par mobile money (MTN, MOOV & CELTIIS)
+                </div>
+            </div>
+        </footer>
+    
+        <div class="notification" id="notification">
+            <span class="close-icon" onclick="hideNotification()">×</span>
+            <h2 id="notification-title">Payer vos tickets en ligne</h2>
+            <p id="notification-message">Sélectionnez votre ticket et procédez au paiement.</p>
+            <div id="ticket-select">
+                <select id="nomTicket">
+                    <option value="">Sélectionnez un ticket</option>
+                </select>
+            </div>
+            <button onclick="buyTicket()">Payer</button>
+        </div>
+        <div id="paymentFrame">
+            <div>
+                <button id="closePaymentFrame" onclick="closePaymentFrame()">×</button>
+                <iframe id="paymentIframe"></iframe>
+            </div>
+        </div>
+        <script>
+            function showNotification() {
+                document.getElementById('notification').style.display = 'block';
+                populateTicketOptions();
+            }
+    
+            function hideNotification() {
+                document.getElementById('notification').style.display = 'none';
+            }
+    
+            function handleLogin(event) {
+                event.preventDefault();
+                var form = document.forms['login'];
+                var username = form.username.value;
+                var password = form.password.value;
+    
+                if (typeof doLogin === 'function') {
+                    return doLogin();
+                } else {
+                    form.submit();
+                }
+            }
+    
+            document.forms['login'].addEventListener('submit', handleLogin);
+        </script>
+    </body>
+    </html>
